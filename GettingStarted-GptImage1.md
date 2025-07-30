@@ -1,12 +1,12 @@
-# Azure OpenAI Service の GPT-Image-1 を使った画像生成手順
+# Azure OpenAI Service の GPT-Image-1 & Sora を使った画像 & 動画生成手順
 
-## 0. Azure OpenAI Service GPT-Image-1 を使う事前準備
+## 0. 事前準備
 
 - Azure サブスクリプション
 - GPT-Image-1 利用申請の承認
-  - Azure OpenAI Service の GPT-Image-1 を利用するには、Azure サブスクリプションのほかに、予め利用申請が必要です。[利用申請](https://aka.ms/oai/gptimage1access) から予め申請を行ってください。
+  - Azure OpenAI Service の GPT-Image-1 を利用するには、Azure サブスクリプションのほかに、予め利用申請が必要です。[利用申請](https://aka.ms/oai/gptimage1access) から予め申請を行ってください。(Sora は不要です)
 
-## 1. Azure OpenAI Service & GPT-Image-1 の利用準備
+## 1. Azure OpenAI Service および GPT-Image-1 & Sora の利用準備
 
 - [Azure AI Foundry (ポータル)](https://ai.azure.com) にサインインし、Azure サブスクリプションが使えるアカウントでサインインします。
   ![](images/AzureAIFoundry_01.png)
@@ -19,10 +19,11 @@
 - AI Foundry プロジェクトを選択して作成します。
   ![](images/AzureAIFoundry_03.png)
 
-- **プロジェクト名** を指定します。(リソースグループ、AI Foundry リソース(名) は適時お好みに合わせて修正します。) リージョンは **West US 3** を選択し、**[作成する]** をクリックして、プロジェクト一式を作成します。完了すると作成したプロジェクトの詳細が表示されます。
+- **プロジェクト名** を指定します。(リソースグループ、AI Foundry リソース(名) は適時お好みに合わせて修正します。) リージョンを選択し、**[作成する]** をクリックして、プロジェクト一式を作成します。完了すると作成したプロジェクトの詳細が表示されます。
+  - GPT-Image-1 は **West US 3** など, Sora は **East US 2** などにありますので、リージョンはどちらかを選択すると良いでしょう。 (今回は迷ったら East US 2 を選んでください)
   ![](images/AzureAIFoundry_04.png)
 
-### GPT-Image-1 モデルのデプロイ
+### GPT-Image-1 & Sora モデルのデプロイ
 
 - 左バナーから **モデル + エンドポイント** をクリックします。
   ![](images/AzureAIFoundry_05.png)
@@ -38,6 +39,8 @@
 
 - デプロイが完了すると、モデルの利用方法が表示されます。**エンドポイント** に表示されている **ターゲットURL** と **キー** を取得して、ローカルに保存するなどしておきます。これらを使って RestAPI で操作できます。
   ![](images/AzureAIFoundry_09.png)
+
+- 同様に **Sora** をデプロイします。
 
 ## 2. GPT-Image-1 の呼び出し
 
@@ -101,9 +104,24 @@ for idx, item in enumerate(response['data']):
 ```
 
 
+## 3. Sora の呼び出し
+
+### Azure AI Foundry での操作
+
+- [Azure AI Foundry (ポータル)](https://ai.azure.com) で左バナーから **プレイグラウンド** をクリックし、表示される **ビデオプレイグラウンド** をクリックします。
+
+- **ビデオプレイグラウンド** が表示されます。デプロイに **sora** が表示されているのを確認して、画面下部の入力欄にプロンプト(生成したい動画の説明)を入力し、**[生成]** をクリックすると、画像が生成されます。
+  ![](images/AzureAIFoundry_13.png)
+
+
 ## 参考ドキュメント (Microsoft Learn)
 
-- [AI を使用して画像を生成する](https://learn.microsoft.com/ja-jp/training/modules/generate-images-azure-openai/)
-- [クイック スタート: Azure AI Foundry モデルで Azure OpenAI を使用してイメージを生成する](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/dall-e-quickstart)
-- [Azure OpenAI イメージ生成モデルを使用する方法](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1)
-- [Azure AI Foundry における Azure OpenAI モデル- 画像生成モデル](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#image-generation-models)
+- 画像生成 (GPT-Image-1)
+  - [AI を使用して画像を生成する](https://learn.microsoft.com/ja-jp/training/modules/generate-images-azure-openai/)
+  - [クイック スタート: Azure AI Foundry モデルで Azure OpenAI を使用してイメージを生成する](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/dall-e-quickstart)
+  - [Azure OpenAI イメージ生成モデルを使用する方法](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/how-to/dall-e?tabs=gpt-image-1)
+  - [Azure AI Foundry における Azure OpenAI モデル- 画像生成モデル](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/concepts/models?tabs=global-standard%2Cstandard-chat-completions#image-generation-models)
+- 動画生成 (Sora)
+  - [Sora ビデオ生成](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/concepts/video-generation)
+  - [クイック スタート: Soraを使用してビデオを生成する (プレビュー)](https://learn.microsoft.com/ja-jp/azure/ai-foundry/openai/video-generation-quickstart)
+  - [Soraで不可能な2D/3Dモーションテクニックをアニメーション化する](https://learn.microsoft.com/ja-jp/training/modules/animate-impossible/)
