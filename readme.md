@@ -1,6 +1,6 @@
-# 生成AI画像生成ハンズオンラボ
+# 生成AI 画像&動画生成ハンズオンラボ
 
-このリポジトリは、Azure OpenAI ServiceのGPT-Image-1を使用した画像生成のハンズオンラボです。
+このリポジトリは、Azure OpenAI ServiceのGPT-Image-1,Soraを使用した画像&画像生成のハンズオンラボです。
 
 ## 📚 コンテンツ
 
@@ -12,8 +12,13 @@ Azure AI FoundryでのGPT-Image-1 & Sora モデルのデプロイ手順と基本
 - REST APIとPythonでの呼び出し方法
 
 ### 2. [画像生成 Step-by-Step ハンズオン](ImageGenerationHOL.md)
-プロンプトエンジニアリングの基礎から高度な技術まで、6つのステップで学習できるハンズオン教材です。
+画像生成の基礎から6つのステップで学習できるハンズオン教材です。
 
+### 3. [動画生成 Step-by-Step ハンズオン](VideoGenerationHOL.md)
+動画生成の基礎から6つのステップで学習できるハンズオン教材です。
+
+### Optional: [Python Notebook](./notebook/)
+Rest API 経由で画像や動画を生成する場合のサンプルコードです。
 
 ## 📖 前提条件
 
