@@ -58,7 +58,7 @@
 
 ### API での操作
 
-### Rest API
+#### Rest API
 
 ```http
 POST https://<your-resource-name>.openai.azure.com/openai/deployments/gpt-image-1/images/generations?api-version=2025-04-01-preview
@@ -74,7 +74,7 @@ Content-Type: application/json
 }
 ```
 
-### Python
+#### Python
 
 ```python
 import requests
@@ -87,9 +87,9 @@ headers = {
     "Content-Type": "application/json"
 }
 
-data = {
-    "prompt": "富士山と桜の美しい風景を描いてください。",
-    "n": 1,
+data = {  
+  "prompt": "富士山と桜の美しい風景を描いてください。",
+  "n": 1,
   "size": "1024x1024",
   "quality": "medium",
   "output_format": "png"
@@ -113,6 +113,50 @@ for idx, item in enumerate(response['data']):
 - **ビデオプレイグラウンド** が表示されます。デプロイに **sora** が表示されているのを確認して、画面下部の入力欄にプロンプト(生成したい動画の説明)を入力し、**[生成]** をクリックすると、画像が生成されます。
   ![](images/AzureAIFoundry_13.png)
 
+
+#### API での操作
+
+#### Rest API
+
+```http
+POST https://<your-resource-name>.openai.azure.com/openai/v1/video/generations/jobs?api-version=preview
+api-key: <your-api-key>
+Content-Type: application/json
+
+{
+  "model": "sora",
+  "prompt" : "青い空の下、子犬が草原を駆け回る",
+  "height" : "1080",
+  "width" : "1080",
+  "n_seconds" : "5",
+  "n_variants" : "1"
+}
+```
+
+### Python
+
+```python
+import requests
+
+endpoint = "https://<your-resource-name>.openai.azure.com/openai/v1/video/generations/jobs?api-version=preview"
+api_key = "<your-api-key>"
+
+headers = {
+    "api-key": api_key,
+    "Content-Type": "application/json"
+}
+
+data = {  
+  "model": "sora",
+  "prompt" : "青い空の下、子犬が草原を駆け回る。カメラは後ろから追いかける",
+  "height" : "1080",
+  "width" : "1080",
+  "n_seconds" : "5",
+  "n_variants" : "1"
+}
+
+response = requests.post(endpoint, headers=headers, json=data)
+```
 
 ## 参考ドキュメント (Microsoft Learn)
 
